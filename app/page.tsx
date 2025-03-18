@@ -12,6 +12,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Filter On Category / All");
   const [isSorted, setIsSorted] = useState(false); // Track if the projects are sorted or not
 
+//updatedimages
 
   useEffect(() => {
     async function fetchCards() {
