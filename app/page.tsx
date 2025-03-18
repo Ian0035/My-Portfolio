@@ -153,37 +153,39 @@ export default function Home() {
               </div>
 
        {/* Dropdown Menu & Sort Button */}
-    <div className="flex space-x-4 mt-6">
-      
-      {/* Dropdown Menu */}
-      <Menu as="div" className="relative inline-block text-left">
-          <div>
-            <MenuButton className="inline-flex justify-center rounded-4xl px-10 py-3 text-base font-medium text-white ring-1 shadow-xs ring-gray-300">
-              {selectedCategory}
-              <ChevronDownIcon aria-hidden="true" className="ml-2 size-6 text-white" />
-            </MenuButton>
-          </div>
-          <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
-            {Object.keys(categories).map((category) => (
-              <MenuItem key={category} as="div">
-                <button
-                  onClick={() => setSelectedCategory(category)}
-                  className="block w-full px-4 py-2 text-sm text-gray-700 text-left hover:bg-gray-100 hover:text-gray-900"
-                >
-                  {category}
-                </button>
-              </MenuItem>
-            ))}
-          </MenuItems>
-        </Menu>
+        <div className="flex space-x-4 mt-6">
+          
+          {/* Dropdown Menu */}
+          <Menu as="div" className="relative inline-block text-left">
+            <div>
+              <MenuButton className="inline-flex items-center justify-center my-auto rounded-4xl px-2 py-1.5 sm:px-4 sm:py-1.5 md:px-10 md:py-3 text-xs sm:text-base font-medium text-white ring-1 shadow-xs ring-gray-300">
+                {selectedCategory}
+                <ChevronDownIcon aria-hidden="true" className="ml-2 size-6 text-white" />
+              </MenuButton>
+            </div>
+            <MenuItems className="absolute z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
+              {Object.keys(categories).map((category) => (
+                <MenuItem key={category} as="div">
+                  <button
+                    onClick={() => setSelectedCategory(category)}
+                    className="block w-full px-4 py-2 text-sm text-gray-700 text-left hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    {category}
+                  </button>
+                </MenuItem>
+              ))}
+            </MenuItems>
+          </Menu>
 
-      {/* Sort by Chronological Order Button */}
-      <button
-          onClick={sortByOrder}
-          className="text-white ring-1 shadow-xs ring-gray-300 px-6 py-3 rounded-4xl transition duration-300"
-        >
-          {isSorted ? "Revert Order" : "Sort Newest First"}
-        </button>
+          {/* Sort by Chronological Order Button */}
+          <button
+            onClick={sortByOrder}
+            className="text-white ring-1 shadow-xs ring-gray-300 px-2 py-1.5 sm:px-4 sm:py-1.5 md:px-6 md:py-3 text-xs sm:text-base rounded-4xl transition duration-300"
+          >
+            {isSorted ? "Revert Order" : "Newest First"}
+          </button>
+
+
     </div>
 
 
