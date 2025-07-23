@@ -1,24 +1,38 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { supabase } from "../lib/supabase";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { motion, AnimatePresence } from "framer-motion";
+import ProjectsTab from "./components/ProjectTabs";
+import CertificatesTab from "./components/CertificatesTabs";
+import ProfileTab from "./components/ProfileTabs";
+
 
 export default function Home() {
   const [cards, setCards] = useState<any[]>([]);
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("Filter On Category / All");
   const [isSorted, setIsSorted] = useState(false); // Track if the projects are sorted or not
+  const tabs = ["Projects", "Certificates", "Profile"];
+  const [selected, setSelected] = useState("Projects");
 
+  const tabOrder = ["Projects", "Certificates", "Profile"];
+
+  const handleTabChange = (tab: string) => {
+    if (tab !== selected) {
+      setSelected(tab);
+    }
+  };
+  
 //updatedimages
 
   useEffect(() => {
     async function fetchCards() {
       const { data: projectsData } = await supabase
       .from("project")
-      .select("*, project_category(category_id), category:project_category(category(name))");
+      .select("*, project_category(category_id), category:project_category(category(name))")
+      .order("order", { ascending: false }); // Toggle between ascending and descending order
+
   
       const projectsWithCategories = (projectsData || []).map((project: any) => ({
         ...project,
@@ -57,6 +71,8 @@ export default function Home() {
     .single();
     setSelectedProject(data);
   };
+
+
 
 
   // Filtered cards based on selected category
@@ -98,6 +114,7 @@ export default function Home() {
     mlloan: "hover:drop-shadow-[0px_20px_20px_rgb(164,212,255)]",
     nextjs: "hover:drop-shadow-[0px_20px_30px_rgb(255,255,255)]",
     bachelor: "hover:drop-shadow-[0px_20px_20px_rgb(40,196,92)]",
+    predictwage: "hover:drop-shadow-[0px_20px_20px_rgb(76,175,80)]",
   };
 
   const projectStyles: Record<string, string> = {
@@ -121,10 +138,65 @@ export default function Home() {
     mlloan: "drop-shadow-[20px_0px_20px_rgb(164,212,255)]",
     nextjs: "drop-shadow-[20px_0px_30px_rgb(255,255,255)]",
     bachelor: "drop-shadow-[20px_0px_20px_rgb(40,196,92)]",
+    predictwage: "drop-shadow-[20px_0px_20px_rgb(76,175,80)]",
+  };
+const tabIndex = tabs.indexOf(selected);
+
+  const [tabHeights, setTabHeights] = useState<{ Projects: number; Certificates: number; Profile: number }>({
+    Projects: 0,
+    Certificates: 0,
+    Profile: 0,
+  });
+
+useEffect(() => {
+  const updateHeights = () => {
+    const screenWidth = window.innerWidth;
+    let projectsHeight;
+
+    if (!selectedProject) {
+      projectsHeight =
+        screenWidth >= 1600 ? 3200 :
+        screenWidth >= 1440 ? 3600 :
+        screenWidth >= 1400 ? 3700 :
+        screenWidth >= 1330 ? 3800 :
+        screenWidth >= 1280 ? 3900 :
+        screenWidth >= 1200 ? 4450 :
+        screenWidth >= 1152 ? 4600 :
+        screenWidth >= 1024 ? 5000 :
+        screenWidth >= 980  ? 6400 :
+        screenWidth >= 900  ? 6800 :
+        screenWidth >= 768  ? 8000 :
+        10000;
+    } else {
+      projectsHeight =
+        screenWidth >= 1440 ? 750 :
+        1200;
+    }
+
+    // Use a tiny delay to ensure re-render catches it
+    requestAnimationFrame(() => {
+      setTabHeights({
+        Projects: projectsHeight,
+        Certificates: 800,
+        Profile: 600,
+      });
+    });
   };
 
+  updateHeights();
+  window.addEventListener("resize", updateHeights);
+
+  return () => window.removeEventListener("resize", updateHeights);
+}, [selectedProject]);
+
+
+
+ 
+
+
+
   return (
-    <div className="bg-gray-950 bg-[url(/images/background.jpg)] bg-[calc(50%+7px)_calc(-10px)] bg-no-repeat text-white p-4 w-full flex flex-col items-center justify-center">
+    <div className="bg-gray-950 min-h-screen overflow-hidden bg-[url(/images/background.jpg)] bg-[calc(50%+7px)_calc(-10px)] bg-no-repeat text-white px-4 pt-4 w-full flex flex-col items-center justify-center">
       <img 
         src="/images/IMG_20240216_140406.jpg" 
         className="mt-36 w-40 h-40 rounded-full object-cover drop-shadow-[0px_0px_40px_rgb(256,256,256)]" 
@@ -152,141 +224,71 @@ export default function Home() {
         
               </div>
 
-       {/* Dropdown Menu & Sort Button */}
-        <div className="flex space-x-4 mt-6">
-          
-          {/* Dropdown Menu */}
-          <Menu as="div" className="relative inline-block text-left">
-            <div>
-              <MenuButton className="inline-flex items-center justify-center my-auto rounded-4xl px-2 py-1.5 sm:px-4 sm:py-1.5 md:px-10 md:py-3 text-xs sm:text-base font-medium text-white ring-1 shadow-xs ring-gray-300">
-                {selectedCategory}
-                <ChevronDownIcon aria-hidden="true" className="ml-2 size-6 text-white" />
-              </MenuButton>
-            </div>
-            <MenuItems className="absolute z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
-              {Object.keys(categories).map((category) => (
-                <MenuItem key={category} as="div">
-                  <button
-                    onClick={() => setSelectedCategory(category)}
-                    className="block w-full px-4 py-2 text-sm text-gray-700 text-left hover:bg-gray-100 hover:text-gray-900"
-                  >
-                    {category}
-                  </button>
-                </MenuItem>
-              ))}
-            </MenuItems>
-          </Menu>
-
-          {/* Sort by Chronological Order Button */}
-          <button
-            onClick={sortByOrder}
-            className="text-white ring-1 shadow-xs ring-gray-300 px-2 py-1.5 sm:px-4 sm:py-1.5 md:px-6 md:py-3 text-xs sm:text-base rounded-4xl transition duration-300"
-          >
-            {isSorted ? "Revert Order" : "Newest First"}
-          </button>
-
-
-    </div>
-
-
-      {/* 📌 Show project list if no project is selected */}
-      {!selectedProject && (
-        <div className="flex flex-wrap gap-12 mt-2 justify-center p-10 pb-20 w-full">
-          {filteredCards.map((card) => (
-            <div 
-              key={card.id} 
-              className={`relative flex mt-10 flex-col rounded-xl bg-white text-gray-700 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 transition-transform duration-300 transform hover:scale-105  drop-shadow-[0px_15px_20px_rgb(255,255,255)] ${shadowStyles[card.color] || ""}`}
-            >
-              <div className="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl shadow-lg">
-                <Image src={`/images/${card.img}`} alt={card.title} layout="fill" objectFit="cover" />
-              </div>
-              <div className="pl-6 pr-6 pt-6 pb-4">
-                <h5 className="mb-2 text-xl font-semibold">{card.title}</h5>
-                <p className="text-base font-light">{card.description}</p>
-              </div>
-              <div className="p-6 pt-0 mt-auto">
-                <div className="mb-1.5 flex flex-wrap gap-2">
-                {card.categories && card.categories.length > 0 ? (
-                card.categories.map((category: string, index: number) => (
-                  <p key={index} className="rounded-4xl text-white bg-gray-400 w-fit border text-sm font-light py-1 px-4">
-                   # {category}
-                  </p>
-                ))
-              ) : (
-                <p className="text-sm font-light py-1 px-4">No Categories</p>
-              )}
-
+              <div className="max-w-xl mx-auto mt-10">
+                {/* Tabs */}
+                <div className="flex gap-4 items-center justify-center mb-6">
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => handleTabChange(tab) }
+                      className={`relative pb-2 text-lg font-light transition-colors duration-300 ${
+                        selected === tab ? "text-gray-400" : "text-white"
+                      }`}
+                    >
+                      {tab}
+                      {selected === tab && (
+                        <motion.span
+                          layoutId="underline"
+                          className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-400"
+                        />
+                      )}
+                    </button>
+                  ))}
                 </div>
-                <button
-                  onClick={() => fetchProjectDetails(card.id)}
-                  className="rounded-lg bg-blue-400 hover:bg-blue-500 py-3 px-6 text-white transition-all"
-                >
-                  Read More
-                </button>
-
               </div>
-            </div>
-            
-          ))}
+
+
+
+    {/* Content */}
+    <div
+        className="relative w-full overflow-hidden transition-all duration-300"
+        style={{ height: tabHeights[selected as keyof typeof tabHeights]}}
+      >
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${tabIndex * 100}%)` }}
+        >
+          {/* Each tab must be hidden visually but still rendered */}
+          <div
+            className="w-full flex-shrink-0 overflow-hidden" style={{ height: "100%" }}
+          >
+            <ProjectsTab
+                      filteredCards={filteredCards}
+                      fetchProjectDetails={fetchProjectDetails}
+                      onSortClick={sortByOrder}
+                      isSorted={isSorted}
+                      selectedCategory={selectedCategory}
+                      setSelectedCategory={setSelectedCategory}
+                      shadowStyles={shadowStyles}
+                      projectStyles={projectStyles}
+                      categories={categories}
+                      selectedProject={selectedProject}
+                      setSelectedProject={setSelectedProject}
+                    />
+          </div>
+          <div
+            className="w-full flex-shrink-0 min-h-0 overflow-hidden"
+          >
+            <CertificatesTab />
+          </div>
+          <div
+            className="w-full flex-shrink-0 min-h-0 overflow-hidden"
+          >
+            <ProfileTab />
+          </div>
         </div>
-      )}
+      </div>
 
-      {/* 📌 Show project details if a project is selected */}
-      {selectedProject && (
-        <>
-          {/* Original Layout for lg+ Screens */}
-          <div className="hidden lg:flex w-11/12 pt-20 justify-between">
-            {/* Image on the left */}
-            <div className="w-6/12">
-              <img
-                src={`/images/${selectedProject.img}`}
-                alt={selectedProject.title}
-                className={`rounded-lg w-full ${projectStyles[selectedProject.color] || ""}`}
-              />
-            </div>
-            
-            {/* Text Content */}
-            <div className="w-5/12 relative">
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="bg-gray-700 text-white px-4 py-2 mb-8 rounded-lg hover:bg-gray-600"
-              >
-                ← Back
-              </button>
-              <div className="text-center">
-                <h1 className="text-3xl w-full font-semibold">{selectedProject.title}</h1>
-                <p className="mt-4 xl:text-xl lg:text-md">{selectedProject.long_description}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* New Layout for md and smaller */}
-          <div className="lg:hidden flex flex-col w-11/12 pt-20">
-            {/* Back Button */}
-            <button
-              onClick={() => setSelectedProject(null)}
-              className="bg-gray-700 text-white px-4 py-2 mb-4 rounded-lg hover:bg-gray-600"
-            >
-              ← Back
-            </button>
-            
-            {/* Title */}
-            <h1 className="text-3xl font-semibold text-center">{selectedProject.title}</h1>
-            
-            {/* Description */}
-            <p className="mt-4 text-center md:text-lg sm:text-base">
-              {selectedProject.long_description}
-            </p>
-
-            {/* Image at the Bottom */}
-            <img
-              src={`/images/${selectedProject.img}`}
-              alt={selectedProject.title}
-              className={`rounded-lg w-full mt-6 ${projectStyles[selectedProject.color] || ""}`}
-            />
-          </div>
-        </>
-      )}
     </div>
   );
 }
