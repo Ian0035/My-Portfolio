@@ -42,6 +42,58 @@ body {
   border-bottom: 3px solid #7f1d1d; /* red-800 */
   border-top: 3px solid #7f1d1d;
 }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes bop {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bop {
+  animation: bop 4s ease-in-out infinite;
+}
+
+.bop-delay-1 {
+  animation-delay: 0.5s;
+}
+.bop-delay-2 {
+  animation-delay: 1.2s;
+}
+.bop-delay-3 {
+  animation-delay: 2s;
+}
+.bop-delay-4 {
+  animation-delay: 0.7s;
+}
+
+@keyframes comet-fly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(500px, 500px); /* Fly diagonally */
+    opacity: 0;
+  }
+}
+
+.comet-animation {
+  position: absolute;
+  top: -100px;
+  pointer-events: none;
+  z-index: 50;
+}
+
 
 
 

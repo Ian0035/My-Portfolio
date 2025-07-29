@@ -6,6 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProjectsTab from "./components/ProjectTabs";
 import CertificatesTab from "./components/CertificatesTabs";
 import ProfileTab from "./components/ProfileTabs";
+import Spinner from "./components/spinner";
+import Comet from "./components/comet";
+
 
 
 export default function Home() {
@@ -15,6 +18,14 @@ export default function Home() {
   const [isSorted, setIsSorted] = useState(false); // Track if the projects are sorted or not
   const tabs = ["Projects", "Certificates", "Profile"];
   const [selected, setSelected] = useState("Projects");
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // simulate loading delay or wait for resources
+    const timer = setTimeout(() => setLoading(false), 5000); // adjust delay as needed
+    return () => clearTimeout(timer);
+  }, []);
 
   const tabOrder = ["Projects", "Certificates", "Profile"];
 
@@ -189,14 +200,90 @@ useEffect(() => {
   return () => window.removeEventListener("resize", updateHeights);
 }, [selectedProject]);
 
+const cometRef = useRef<HTMLImageElement | null>(null);
 
+  useEffect(() => {
+    const animateComet = () => {
+      const comet = cometRef.current;
+      if (!comet) return;
 
- 
+      // Set random horizontal position (-100px to 50% of viewport width)
+      const randomLeft =
+        Math.floor(Math.random() * (window.innerWidth / 2 + 100)) - 100;
+      comet.style.left = `${randomLeft}px`;
+
+      // Reset animation
+      comet.style.animation = "none";
+      void comet.offsetWidth; // trigger reflow
+      comet.style.animation = "comet-fly 2s linear forwards";
+
+      // Schedule next animation
+      const nextDelay = Math.random() * 10000 + 5000;
+      setTimeout(animateComet, nextDelay);
+    };
+
+    const initialDelay = 5000;
+    const timeoutId = setTimeout(animateComet, initialDelay);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
 
 
   return (
-    <div className="bg-gray-950 min-h-screen overflow-hidden bg-[url(/images/background.jpg)] bg-[calc(50%+7px)_calc(-10px)] bg-no-repeat text-white px-4 pt-4 w-full flex flex-col items-center justify-center">
+    <div>
+      {loading ? (
+        <Spinner />
+      ) : (
+
+    <div className="relative bg-black min-h-screen overflow-hidden bg-no-repeat text-white px-4 pt-4 w-full flex flex-col items-center justify-center">
+
+      {/* Star Field */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="w-full h-full relative">
+            {[...Array(150)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute bg-white rounded-full opacity-70"
+                style={{
+                  width: `${Math.random() * 2 + 1}px`,
+                  height: `${Math.random() * 2 + 1}px`,
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animation: `twinkle ${2 + Math.random() * 3}s infinite ease-in-out`,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+      <Comet />
+
+
+      <img
+        className="absolute right-0 top-[10rem] w-[40rem] h-auto bop bop-delay-1"
+        src="/images/planet1.png"
+        alt="Planet 1"
+      />
+      <img
+        className="absolute left-3 top-[55rem] w-[20rem] h-auto bop bop-delay-2"
+        src="/images/planet2.png"
+        alt="Planet 2"
+      />
+      <img
+        className="absolute right-1/12 top-[70rem] w-[30rem] h-auto bop bop-delay-3"
+        src="/images/planet3.png"
+        alt="Planet 3"
+      />
+      <img
+        className="absolute left-1/12 top-[110rem] w-[30rem] h-auto bop bop-delay-4"
+        src="/images/planet4.png"
+        alt="Planet 4"
+      />
+
+
+
+
       <img 
         src="/images/IMG_20240216_140406.jpg" 
         className="mt-36 w-40 h-40 rounded-full object-cover drop-shadow-[0px_0px_40px_rgb(256,256,256)]" 
@@ -289,6 +376,8 @@ useEffect(() => {
         </div>
       </div>
 
+    </div>
+    )}
     </div>
   );
 }
