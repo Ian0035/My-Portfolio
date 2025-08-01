@@ -8,6 +8,7 @@ import CertificatesTab from "./components/CertificatesTabs";
 import ProfileTab from "./components/ProfileTabs";
 import Spinner from "./components/spinner";
 import Comet from "./components/comet";
+import Footer from "./components/footer";
 
 
 
@@ -236,7 +237,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
         <Spinner />
       ) : (
 
-    <div className="relative bg-black min-h-screen overflow-hidden bg-no-repeat text-white px-4 pt-4 w-full flex flex-col items-center justify-center">
+    <div className="relative bg-black min-h-screen overflow-hidden bg-no-repeat text-white pt-4 w-full flex flex-col items-center justify-center">
 
       {/* Star Field */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -304,7 +305,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
 
       <div className="flex space-x-4 pt-5">
         <motion.a
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-white z-0"
           href="https://www.linkedin.com/in/ian-hoogstrate-25b49929b/"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -314,7 +315,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
         </motion.a>
 
         <motion.a
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-white z-0"
           href="https://github.com/Ian0035"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -324,7 +325,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
         </motion.a>
 
         <motion.a
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-white z-0"
           href="https://www.instagram.com/ianhoogstrate/"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -398,7 +399,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
           </div>
         </div>
       </div>
-
+      <Footer />
     </div>
     )}
     </div>

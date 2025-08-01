@@ -1,9 +1,9 @@
 export default function CertificatesTab() {
   return (
     <div className="w-4/5 mx-auto">
-      <div className="flex flex-wrap mt-6 justify-between">
+      <div className="flex sm:flex-row flex-col justify-between">
         {/* Certificate Card */}
-        <div className="border-2 w-5/12 border-red-800">
+        <div className="border-2 sm:w-5/12 w-full border-red-800 mb-3">
         <div className="border-frame bg-white border-red p-4 shadow-lg">
         <div className="border-red-800 border-2 bg-white p-2.5 text-center">
           <div className="border-red-800 border-2 px-10 pb-10 pt-4">
@@ -22,7 +22,7 @@ export default function CertificatesTab() {
           </div>
         </div>
 
-        <div className="border-2 w-5/12 border-red-800">
+        <div className="border-2 sm:w-5/12 w-full border-red-800 mb-3">
         <div className="border-frame bg-white border-red p-4 shadow-lg">
         <div className="border-red-800 border-2 bg-white p-2.5 text-center">
           <div className="border-red-800 border-2 px-10 pb-10 pt-4">
