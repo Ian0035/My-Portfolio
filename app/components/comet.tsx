@@ -27,7 +27,7 @@ export default function Comet() {
       y: 1700,
       opacity: [1, 1, 1],
       transition: {
-        duration: 3,
+        duration: 2,
         ease: "linear",
       },
     });
@@ -60,6 +60,7 @@ export default function Comet() {
         width: "100px",
         pointerEvents: "none",
         zIndex: 0,
+        filter: "grayscale(100%)",
       }}
     />
   );

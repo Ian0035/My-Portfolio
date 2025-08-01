@@ -284,32 +284,55 @@ const cometRef = useRef<HTMLImageElement | null>(null);
 
 
 
-      <img 
-        src="/images/IMG_20240216_140406.jpg" 
-        className="mt-36 w-40 h-40 rounded-full object-cover drop-shadow-[0px_0px_40px_rgb(256,256,256)]" 
-        alt="Ian Hoogstrate" 
+      <motion.img
+        src="/images/IMG_20240216_140406.jpg"
+        className="mt-36 w-40 h-40 rounded-full object-cover drop-shadow-[0px_0px_40px_rgb(256,256,256)]"
+        alt="Ian Hoogstrate"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       />
-      <p className="text-3xl font-bold pt-5">Ian Hoogstrate</p>
+
+      <motion.p
+        className="text-3xl font-bold pt-5"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        Ian Hoogstrate
+      </motion.p>
+
       <div className="flex space-x-4 pt-5">
-        
-                <a className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
-                  href="https://www.linkedin.com/in/ian-hoogstrate-25b49929b/">
-                  <i className="bi bi-linkedin text-black text-3xl pt-1"></i>
-                </a>
-        
-                <a
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
-                  href="https://github.com/Ian0035">
-                  <i className="bi bi-github text-black text-3xl pt-1"></i>
-                </a>
-        
-                <a
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
-                  href="https://www.instagram.com/ianhoogstrate/">
-                  <i className="bi bi-instagram text-black text-3xl pt-1"></i>
-                </a>
-        
-              </div>
+        <motion.a
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
+          href="https://www.linkedin.com/in/ian-hoogstrate-25b49929b/"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.5 }}
+        >
+          <i className="bi bi-linkedin text-black text-3xl pt-1"></i>
+        </motion.a>
+
+        <motion.a
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
+          href="https://github.com/Ian0035"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.5 }}
+        >
+          <i className="bi bi-github text-black text-3xl pt-1"></i>
+        </motion.a>
+
+        <motion.a
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-white"
+          href="https://www.instagram.com/ianhoogstrate/"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.0, duration: 0.5 }}
+        >
+          <i className="bi bi-instagram text-black text-3xl pt-1"></i>
+        </motion.a>
+      </div>
 
               <div className="max-w-xl mx-auto mt-10">
                 {/* Tabs */}
