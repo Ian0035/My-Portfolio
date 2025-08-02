@@ -11,7 +11,7 @@ const Footer = () => {
       />
 
       {/* Overlay Text */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white text-cente p-4 top-1/2">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white text-center text-outline p-4 top-1/2">
         <p className="sm:text-4xl text-lg font-semibold">© 2025 Ian Hoogstrate</p>
         <div className="sm:text-2xl text-base mt-2 space-x-4">
           <p>All rights reserved</p>

@@ -190,7 +190,7 @@ useEffect(() => {
       setTabHeights({
         Projects: projectsHeight,
         Certificates: 800,
-        Profile: 600,
+        Profile: 400,
       });
     });
   };
@@ -395,7 +395,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
           <div
             className="w-full flex-shrink-0 min-h-0 overflow-hidden"
           >
-            <ProfileTab />
+            <ProfileTab handleTabChange={handleTabChange} />
           </div>
         </div>
       </div>
