@@ -9,6 +9,7 @@ import ProfileTab from "./components/ProfileTabs";
 import Spinner from "./components/spinner";
 import Comet from "./components/comet";
 import Footer from "./components/footer";
+import StarField from "./components/Starfield";
 
 
 
@@ -17,8 +18,8 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("Filter On Category / All");
   const [isSorted, setIsSorted] = useState(false); // Track if the projects are sorted or not
-  const tabs = ["Projects", "Certificates", "Profile"];
-  const [selected, setSelected] = useState("Projects");
+  const tabs = ["Profile", "Certificates", "Projects"];
+  const [selected, setSelected] = useState("Profile");
 
   const [loading, setLoading] = useState(true);
 
@@ -28,7 +29,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  const tabOrder = ["Projects", "Certificates", "Profile"];
+  const tabOrder = ["Profile", "Certificates", "Projects"];
 
   const handleTabChange = (tab: string) => {
     if (tab !== selected) {
@@ -127,6 +128,7 @@ export default function Home() {
     nextjs: "hover:drop-shadow-[0px_20px_30px_rgb(255,255,255)]",
     bachelor: "hover:drop-shadow-[0px_20px_20px_rgb(40,196,92)]",
     predictwage: "hover:drop-shadow-[0px_20px_20px_rgb(76,175,80)]",
+    aisentiment: "hover:drop-shadow-[0px_20px_20px_rgb(191,230,246)]",
   };
 
   const projectStyles: Record<string, string> = {
@@ -151,19 +153,39 @@ export default function Home() {
     nextjs: "drop-shadow-[20px_0px_30px_rgb(255,255,255)]",
     bachelor: "drop-shadow-[20px_0px_20px_rgb(40,196,92)]",
     predictwage: "drop-shadow-[20px_0px_20px_rgb(76,175,80)]",
+    aisentiment: "drop-shadow-[20px_0px_20px_rgb(191,230,246)]",
   };
 const tabIndex = tabs.indexOf(selected);
 
-  const [tabHeights, setTabHeights] = useState<{ Projects: number; Certificates: number; Profile: number }>({
-    Projects: 0,
-    Certificates: 0,
+  const [tabHeights, setTabHeights] = useState<{ Profile: number; Certificates: number; Projects: number }>({
     Profile: 0,
+    Certificates: 0,
+    Projects: 0,
   });
 
 useEffect(() => {
   const updateHeights = () => {
     const screenWidth = window.innerWidth;
     let projectsHeight;
+    let profileHeight;
+    profileHeight =
+        screenWidth >= 1600 ? 326 :
+        screenWidth >= 1440 ? 400 :
+        screenWidth >= 1024 ? 520 :
+        screenWidth >= 768  ? 620 :
+        screenWidth >= 425  ? 820 :
+        screenWidth >= 375  ? 880 :
+        1040;
+
+    let certHeight;
+    certHeight =
+        screenWidth >= 1600 ? 420 :
+        screenWidth >= 1440 ? 450 :
+        screenWidth >= 1024 ? 540 :
+        screenWidth >= 768  ? 780 :
+        screenWidth >= 425  ? 590 :
+        screenWidth >= 375  ? 600 :
+        620;
 
     if (!selectedProject) {
       projectsHeight =
@@ -184,13 +206,14 @@ useEffect(() => {
         screenWidth >= 1440 ? 750 :
         1200;
     }
+    
 
     // Use a tiny delay to ensure re-render catches it
     requestAnimationFrame(() => {
       setTabHeights({
+        Profile: profileHeight,
+        Certificates: certHeight,
         Projects: projectsHeight,
-        Certificates: 800,
-        Profile: 400,
       });
     });
   };
@@ -240,70 +263,55 @@ const cometRef = useRef<HTMLImageElement | null>(null);
     <div className="relative bg-black min-h-screen overflow-hidden bg-no-repeat text-white pt-4 w-full flex flex-col items-center justify-center">
 
       {/* Star Field */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="w-full h-full relative">
-            {[...Array(150)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute bg-white rounded-full opacity-70"
-                style={{
-                  width: `${Math.random() * 2 + 1}px`,
-                  height: `${Math.random() * 2 + 1}px`,
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animation: `twinkle ${2 + Math.random() * 3}s infinite ease-in-out`,
-                }}
-              />
-            ))}
-          </div>
-        </div>
+      <StarField />
 
       <Comet />
 
 
       <img
-        className="absolute right-0 top-[10rem] w-[40rem] h-auto bop bop-delay-1"
+        className="absolute right-0 top-[10rem] xl:w-[40rem] lg:w-[30rem] md:w-[20rem] sm:w-[10rem] w-[5rem] h-auto bop bop-delay-1 z-0"
         src="/images/planet1.png"
         alt="Planet 1"
       />
       <img
-        className="absolute left-3 top-[55rem] w-[20rem] h-auto bop bop-delay-2"
+        className="absolute left-3 top-[55rem] xl:w-[20rem] lg:w-[20rem] md:w-[10rem] sm:w-[10rem] w-[5rem] h-auto bop bop-delay-2"
         src="/images/planet2.png"
         alt="Planet 2"
       />
       <img
-        className="absolute right-1/12 top-[70rem] w-[30rem] h-auto bop bop-delay-3"
+        className="absolute right-1/12 top-[70rem] xl:w-[30rem] lg:w-[20rem] md:w-[10rem] sm:w-[10rem] w-[5rem] h-auto bop bop-delay-3"
         src="/images/planet3.png"
         alt="Planet 3"
       />
       <img
-        className="absolute left-1/12 top-[110rem] w-[30rem] h-auto bop bop-delay-4"
+        className="absolute left-1/12 top-[110rem] xl:w-[30rem] lg:w-[20rem] md:w-[10rem] sm:w-[10rem] w-[5rem] h-auto bop bop-delay-4"
         src="/images/planet4.png"
         alt="Planet 4"
       />
 
+      <header className="relative z-10">
+          <motion.img
+            src="/images/IMG_20240216_140406.jpg"
+            className="mt-20 mx-auto w-40 h-40 rounded-full object-cover drop-shadow-[0px_0px_40px_rgb(256,256,256)]"
+            alt="Ian Hoogstrate"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+
+          <motion.p
+            className="text-3xl font-bold pt-5 z-10"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            Reach For The <span className="text-red-400">Stars</span>
+              </motion.p>
+
+      </header>
 
 
-
-      <motion.img
-        src="/images/IMG_20240216_140406.jpg"
-        className="mt-36 w-40 h-40 rounded-full object-cover drop-shadow-[0px_0px_40px_rgb(256,256,256)]"
-        alt="Ian Hoogstrate"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      />
-
-      <motion.p
-        className="text-3xl font-bold pt-5"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
-        Ian Hoogstrate
-      </motion.p>
-
-      <div className="flex space-x-4 pt-5">
+      <div id="links" className="flex space-x-4 pt-5">
         <motion.a
           className="flex items-center justify-center w-12 h-12 rounded-full bg-white z-0"
           href="https://www.linkedin.com/in/ian-hoogstrate-25b49929b/"
@@ -335,7 +343,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
         </motion.a>
       </div>
 
-              <div className="max-w-xl mx-auto mt-10">
+              <div id="tabs" className="max-w-xl mx-auto mt-10">
                 {/* Tabs */}
                 <div className="flex gap-4 items-center justify-center mb-6">
                   {tabs.map((tab) => (
@@ -371,7 +379,18 @@ const cometRef = useRef<HTMLImageElement | null>(null);
         >
           {/* Each tab must be hidden visually but still rendered */}
           <div
-            className="w-full flex-shrink-0 overflow-hidden" style={{ height: "100%" }}
+            className="w-full flex-shrink-0 overflow-hidden mt-6"
+          >
+              <ProfileTab handleTabChange={handleTabChange} />
+
+          </div>
+          <div
+            className="w-full flex-shrink-0 min-h-0 overflow-hidden mt-6"
+          >
+            <CertificatesTab />
+          </div>
+          <div
+            className="w-full flex-shrink-0 min-h-0 overflow-hidden"
           >
             <ProjectsTab
                       filteredCards={filteredCards}
@@ -386,16 +405,6 @@ const cometRef = useRef<HTMLImageElement | null>(null);
                       selectedProject={selectedProject}
                       setSelectedProject={setSelectedProject}
                     />
-          </div>
-          <div
-            className="w-full flex-shrink-0 min-h-0 overflow-hidden"
-          >
-            <CertificatesTab />
-          </div>
-          <div
-            className="w-full flex-shrink-0 min-h-0 overflow-hidden"
-          >
-            <ProfileTab handleTabChange={handleTabChange} />
           </div>
         </div>
       </div>

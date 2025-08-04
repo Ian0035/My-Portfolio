@@ -7,8 +7,8 @@ type ProfileTabProps = {
 
 export default function ProfileTab({ handleTabChange }: ProfileTabProps) {
   return (
-    <div className="text-white flex flex-row justify-evenly">
-      <div className="w-7/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div className="text-white flex flex-row justify-evenly z-10">
+      <div id="profile" className="md:w-7/12 w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 z-10">
         <div>
           <h1 className="text-4xl font-bold">
             Hi, I'm <span className="text-red-400">Ian Hoogstrate</span>

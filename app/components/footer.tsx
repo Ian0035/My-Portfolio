@@ -2,12 +2,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full h-96">
+    <footer id="footer" className="relative z-0 w-full h-96">
       {/* Background Image */}
       <img
         src="/footer.png" // Replace with your actual image path
         alt="Footer background"
-        className="w-full h-full object-cover absolute inset-0 z-0"
+        className="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none"
       />
 
       {/* Overlay Text */}

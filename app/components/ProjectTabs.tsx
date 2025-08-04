@@ -52,7 +52,7 @@ export default function ProjectsTab({
   return (
     <div className="w-full h-full max-h-full overflow-auto">
       {/* Category Dropdown */}
-      <div className="flex space-x-4 mt-6 mx-auto justify-center">
+      <div className="flex space-x-4 mt-6 mx-auto px-2 justify-center">
         <Menu as="div" className="relative inline-block text-left">
           <MenuButton className="inline-flex items-center justify-center rounded-4xl px-4 py-2 text-sm font-medium text-white ring-1 ring-gray-300">
             {selectedCategory}
@@ -123,27 +123,36 @@ export default function ProjectsTab({
         </div>
       ) : (
         <>
-        <div className="hidden mx-auto lg:flex w-11/12 pt-20 justify-between">
-            <div className="w-6/12">
-                <img
-                    src={`/images/${selectedProject.img}`}
-                    alt={selectedProject.title}
-                    className={`rounded-lg w-full ${selectedProject.color ? projectStyles[selectedProject.color] : ""}`}
-                />
+        <div className="hidden mx-auto lg:flex w-11/12 py-20 justify-between">
+          {/* Left - Image */}
+          <div className="w-6/12 max-h-[35rem]">
+            <img
+              src={`/images/${selectedProject.img}`}
+              alt={selectedProject.title}
+              className={`rounded-lg w-full max-h-[35rem] object-cover ${selectedProject.color ? projectStyles[selectedProject.color] : ""}`}
+            />
+          </div>
+
+          {/* Right - Scrollable text */}
+          <div className="w-5/12 max-h-[35rem] overflow-hidden flex flex-col">
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="bg-gray-700 text-white px-4 py-2 mb-4 rounded-lg hover:bg-gray-600"
+            >
+              ← Back
+            </button>
+
+            <div className="text-center">
+              <h1 className="text-3xl font-semibold">{selectedProject.title}</h1>
             </div>
-            <div className="w-5/12 relative">
-                <button
-                    onClick={() => setSelectedProject(null)}
-                    className="bg-gray-700 text-white px-4 py-2 mb-8 rounded-lg hover:bg-gray-600"
-                >
-                    ← Back
-                </button>
-                <div className="text-center">
-                    <h1 className="text-3xl w-full font-semibold">{selectedProject.title}</h1>
-                    <p className="mt-4 xl:text-xl lg:text-md">{selectedProject.long_description}</p>
-                </div>
-                </div>
+
+            <div className="mt-4 pr-2 overflow-y-auto flex-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full">
+              <p className="xl:text-xl lg:text-md">{selectedProject.long_description}</p>
+            </div>
+          </div>
         </div>
+
+
         <div className="lg:hidden mx-auto flex flex-col w-11/12 pt-20">
             <button
                 onClick={() => setSelectedProject(null)}

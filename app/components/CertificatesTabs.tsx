@@ -1,40 +1,40 @@
 export default function CertificatesTab() {
   return (
     <div className="w-4/5 mx-auto">
-      <div className="flex sm:flex-row flex-col justify-between">
+      <div className="flex lg:flex-row flex-col justify-between">
         {/* Certificate Card */}
-        <div className="border-2 sm:w-5/12 w-full border-red-800 mb-3">
+        <div className="border-2 lg:w-5/12 w-full border-red-800 mb-3">
         <div className="border-frame bg-white border-red p-4 shadow-lg">
         <div className="border-red-800 border-2 bg-white p-2.5 text-center">
-          <div className="border-red-800 border-2 px-10 pb-10 pt-4">
-            <p className="text-3xl text-black font-semibold">Certificate</p>
-            <p className="relative text-3xl w-fit text-black font-semibold mb-2 mx-auto double-underline">Of Completion</p>
-            <p className="text-black">This is to certify that</p>
-            <p className="text-3xl text-black font-bold">Ian Hoogstrate</p>
-            <p className="text-sm text-black font-medium">Bachelor: Applied Computer Science with a specialization in AI</p>
+          <div className="border-red-800 border-2 sm:px-9 sm:pb-9 sm:pt-4 px-2 pb-2 pt-1">
+            <p className="sm:text-3xl text-base text-black font-semibold">Certificate</p>
+            <p className="relative sm:text-3xl text-base w-fit text-black font-semibold mb-2 mx-auto double-underline">Of Completion</p>
+            <p className="text-black">From: Thomas More</p>
+            <p className="sm:text-3xl text-base text-black font-bold">Ian Hoogstrate</p>
+            <p className="sm:text-sm text-xs text-black font-medium">Bachelor: Applied Computer Science with a specialization in AI</p>
             <div className="flex justify-between items-center mt-4">
-            <p className="text-black">Date of Issue: 30/06/2025</p>
-              <img className="h-24 w-24" src="/images/seal.png" alt="" />
-            <p className="text-black">Signature: Hoogstrate</p>
+            <p className="text-black sm:text-base text-xs">Date of Issue: 30/06/2025</p>
+              <img className="xl:h-24 xl:w-24 sm:w-15 sm:h-15 h-10 w-10" src="/images/seal.png" alt="" />
+            <p className="text-black sm:text-base text-xs">Signature Hoogstrate</p>
             </div>
             </div>
           </div>
           </div>
         </div>
 
-        <div className="border-2 sm:w-5/12 w-full border-red-800 mb-3">
+        <div className="border-2 lg:w-5/12 w-full border-red-800 mb-3">
         <div className="border-frame bg-white border-red p-4 shadow-lg">
         <div className="border-red-800 border-2 bg-white p-2.5 text-center">
-          <div className="border-red-800 border-2 px-10 pb-10 pt-4">
-            <p className="text-3xl text-black font-semibold">Certificate</p>
-            <p className="relative text-3xl w-fit text-black font-semibold mb-2 mx-auto double-underline">Of Completion</p>
-            <p className="text-black">This is to certify that</p>
-            <p className="text-3xl text-black font-bold">Ian Hoogstrate</p>
-            <p className="text-sm text-black font-medium">Bachelor: Digital Buisness & AI with a specialization in Buisiness Data Analytics</p>
+          <div className="border-red-800 border-2 sm:px-9 sm:pb-9 sm:pt-4 px-2 pb-2 pt-1">
+            <p className="sm:text-3xl text-base text-black font-semibold">Certificate</p>
+            <p className="relative sm:text-3xl text-base w-fit text-black font-semibold mb-2 mx-auto double-underline">Of Completion</p>
+            <p className="text-black">From: BFH</p>
+            <p className="sm:text-3xl text-base text-black font-bold">Ian Hoogstrate</p>
+            <p className="sm:text-sm text-xs text-black font-medium">Bachelor: Digital Buisness & AI with a specialization in Buisiness Data Analytics</p>
             <div className="flex justify-between items-center mt-4">
-            <p className="text-black">Date of Issue: 30/06/2025</p>
-              <img className="h-24 w-24" src="/images/seal.png" alt="" />
-            <p className="text-black">Signature: Hoogstrate</p>
+            <p className="text-black sm:text-base text-xs">Date of Issue: 30/06/2025</p>
+              <img className="xl:h-24 xl:w-24 sm:w-15 sm:h-15 h-10 w-10" src="/images/seal.png" alt="" />
+            <p className="text-black sm:text-base text-xs">Signature Hoogstrate</p>
             </div>
             </div>
           </div>
