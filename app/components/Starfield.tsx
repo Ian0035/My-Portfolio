@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
+
 const layers = [
   { count: 70, sizeRange: [2, 3.5], parallaxFactor: 20, opacity: 0.9 },
   { count: 50, sizeRange: [1.5, 2.5], parallaxFactor: 10, opacity: 0.7 },
@@ -9,10 +10,19 @@ const layers = [
 function StarField() {
   const [targetMousePos, setTargetMousePos] = useState({ x: 0.5, y: 0.5 });
   const currentMousePos = useRef({ x: 0.5, y: 0.5 });
-  const animationFrameId = useRef(null);
+  const animationFrameId = useRef<number | null>(null);
   const [, setRender] = useState(0);
 
-  const starsRef = useRef([]);
+type Star = {
+  size: number;
+  top: number;
+  left: number;
+  twinkleDuration: number;
+  twinkleDelay: number;
+};
+
+const starsRef = useRef<Star[][]>([]);
+  
 
   // Generate stars once
   useEffect(() => {
@@ -31,7 +41,7 @@ function StarField() {
 
   // Track mouse position
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setTargetMousePos({
         x: e.clientX / window.innerWidth,
         y: e.clientY / window.innerHeight,
@@ -57,8 +67,11 @@ function StarField() {
 
     animationFrameId.current = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(animationFrameId.current);
-  }, [targetMousePos]);
+  return () => {
+    if (animationFrameId.current !== null) {
+      cancelAnimationFrame(animationFrameId.current);
+    }
+};  }, [targetMousePos]);
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
