@@ -28,7 +28,7 @@ export default function CertificatesTab() {
           <div className="border-red-800 border-2 sm:px-9 sm:pb-9 sm:pt-4 px-2 pb-2 pt-1">
             <p className="sm:text-3xl text-base text-black font-semibold">Certificate</p>
             <p className="relative sm:text-3xl text-base w-fit text-black font-semibold mb-2 mx-auto double-underline">Of Completion</p>
-            <p className="text-black">From: BFH</p>
+            <p className="text-black">From: Bern University, BFH</p>
             <p className="sm:text-3xl text-base text-black font-bold">Ian Hoogstrate</p>
             <p className="sm:text-sm text-xs text-black font-medium">Bachelor: Digital Buisness & AI with a specialization in Buisiness Data Analytics</p>
             <div className="flex justify-between items-center mt-4">
