@@ -20,7 +20,7 @@ export default function ProfileTab({ handleTabChange }: ProfileTabProps) {
             </div>
             <div className="flex items-center space-x-2">
               <Cake className="w-5 h-5 text-red-400" />
-              <span>21 Years Old</span>
+              <span>22 Years Old</span>
             </div>
             <div className="flex items-center space-x-2">
               <Laptop className="w-5 h-5 text-red-400" />
