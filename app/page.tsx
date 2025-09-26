@@ -100,7 +100,7 @@ export default function Home() {
     "AI": 1,
     "Data": 2,
     "Website": 3,
-    "WebApplication": 4,
+    "Full Stack": 4,
     "Docker": 5,
     "Game": 6,
     "IoT": 7,
