@@ -4,12 +4,14 @@ import { supabase } from "../lib/supabase";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectsTab from "./components/ProjectTabs";
-import CertificatesTab from "./components/CertificatesTabs";
+import AchievementsTab from "./components/AchievementsTabs";
+import WorkExperienceTab from "./components/WorkExperienceTabs";
 import ProfileTab from "./components/ProfileTabs";
 import Spinner from "./components/spinner";
 import Comet from "./components/comet";
 import Footer from "./components/footer";
 import StarField from "./components/Starfield";
+import Snowfall from "react-snowfall";
 
 
 
@@ -18,7 +20,7 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("Filter On Category / All");
   const [isSorted, setIsSorted] = useState(false); // Track if the projects are sorted or not
-  const tabs = ["Profile", "Certificates", "Projects"];
+  const tabs = ["Profile","Work", "Achievements", "Projects"];
   const [selected, setSelected] = useState("Profile");
 
   const [loading, setLoading] = useState(true);
@@ -29,7 +31,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  const tabOrder = ["Profile", "Certificates", "Projects"];
+  const tabOrder = ["Profile", "Work", "Achievements", "Projects"];
 
   const handleTabChange = (tab: string) => {
     if (tab !== selected) {
@@ -157,9 +159,10 @@ export default function Home() {
   };
 const tabIndex = tabs.indexOf(selected);
 
-  const [tabHeights, setTabHeights] = useState<{ Profile: number; Certificates: number; Projects: number }>({
+  const [tabHeights, setTabHeights] = useState<{ Profile: number; Work: number; Achievements: number; Projects: number }>({
     Profile: 0,
-    Certificates: 0,
+    Work: 0,
+    Achievements: 0,
     Projects: 0,
   });
 
@@ -170,22 +173,32 @@ useEffect(() => {
     let profileHeight;
     profileHeight =
         screenWidth >= 1600 ? 326 :
-        screenWidth >= 1440 ? 400 :
+        screenWidth >= 1440 ? 420 :
         screenWidth >= 1024 ? 520 :
         screenWidth >= 768  ? 620 :
         screenWidth >= 425  ? 820 :
         screenWidth >= 375  ? 880 :
         1040;
 
-    let certHeight;
-    certHeight =
-        screenWidth >= 1600 ? 420 :
-        screenWidth >= 1440 ? 450 :
-        screenWidth >= 1024 ? 540 :
-        screenWidth >= 768  ? 780 :
-        screenWidth >= 425  ? 590 :
-        screenWidth >= 375  ? 600 :
-        620;
+    let achievementsHeight;
+    achievementsHeight =
+        screenWidth >= 1600 ? 950 :
+        screenWidth >= 1440 ? 950 :
+        screenWidth >= 1024 ? 950 :
+        screenWidth >= 768  ? 1400 :
+        screenWidth >= 425  ? 1200 :
+        screenWidth >= 375  ? 1250 :
+        1300;
+
+    let workExpHeight;
+    workExpHeight =
+        screenWidth >= 1600 ? 580 :
+        screenWidth >= 1440 ? 580 :
+        screenWidth >= 1024 ? 580 :
+        screenWidth >= 768  ? 680 :
+        screenWidth >= 425  ? 750 :
+        screenWidth >= 375  ? 780 :
+        820;
 
     if (!selectedProject) {
       projectsHeight =
@@ -212,7 +225,8 @@ useEffect(() => {
     requestAnimationFrame(() => {
       setTabHeights({
         Profile: profileHeight,
-        Certificates: certHeight,
+        Work: workExpHeight,
+        Achievements: achievementsHeight,
         Projects: projectsHeight,
       });
     });
@@ -261,6 +275,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
       ) : (
 
     <div className="relative bg-black min-h-screen overflow-hidden bg-no-repeat text-white pt-4 w-full flex flex-col items-center justify-center">
+      <Snowfall color="white"/>
 
       {/* Star Field */}
       <StarField />
@@ -387,7 +402,12 @@ const cometRef = useRef<HTMLImageElement | null>(null);
           <div
             className="w-full flex-shrink-0 min-h-0 overflow-hidden mt-6"
           >
-            <CertificatesTab />
+            <WorkExperienceTab />
+          </div>
+          <div
+            className="w-full flex-shrink-0 min-h-0 overflow-hidden mt-6"
+          >
+            <AchievementsTab />
           </div>
           <div
             className="w-full flex-shrink-0 min-h-0 overflow-hidden"

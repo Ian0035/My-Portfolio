@@ -28,7 +28,7 @@ export default function ProfileTab({ handleTabChange }: ProfileTabProps) {
             </div>
             <div className="flex items-center space-x-2">
               <BriefcaseBusiness className="w-5 h-5 text-red-400" />
-              <span>0 Years of Relevant Work Experience</span>
+              <span>Internship @Palette 2025</span>
             </div>
             <div className="flex items-center space-x-2">
               <Clock className="w-5 h-5 text-red-400" />
