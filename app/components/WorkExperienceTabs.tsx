@@ -26,7 +26,7 @@ export default function WorkExperienceTab() {
                 <div className="inline-block px-3 py-1 bg-red-400/10 border border-red-400/30 rounded-full mb-3">
                   <span className="text-red-400 text-xs font-semibold uppercase tracking-wider">Internship</span>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-2">Fullstack Engineer</h3>
+                <h3 className="text-3xl font-bold text-white mb-2">TypeScript Engineer</h3>
                 <p className="text-xl text-gray-300">Palette</p>
               </div>
               <img className="xl:h-16 xl:w-16 w-14 h-14 object-contain opacity-90" src="palette-logo-symbol-light.svg" alt="Palette" />
@@ -61,7 +61,7 @@ export default function WorkExperienceTab() {
                 'Part of a dynamic startup team building innovative solutions',
                 'Brought valuable insights to drive product development',
                 'Engineered and deployed code to production environments',
-                'Contributed to full-stack development and AI integrations',
+                'Contributed to full-stack development using TypeScript and React',
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start space-x-3 group">
                   <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform"></div>
