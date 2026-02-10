@@ -131,6 +131,8 @@ export default function Home() {
     bachelor: "hover:drop-shadow-[0px_20px_20px_rgb(40,196,92)]",
     predictwage: "hover:drop-shadow-[0px_20px_20px_rgb(76,175,80)]",
     aisentiment: "hover:drop-shadow-[0px_20px_20px_rgb(191,230,246)]",
+    mastra: "hover:drop-shadow-[0px_20px_20px_rgb(76,175,80)]",
+    lovebuilder: "hover:drop-shadow-[0px_20px_20px_rgb(222,91,121)]",
   };
 
   const projectStyles: Record<string, string> = {
@@ -156,6 +158,8 @@ export default function Home() {
     bachelor: "drop-shadow-[20px_0px_20px_rgb(40,196,92)]",
     predictwage: "drop-shadow-[20px_0px_20px_rgb(76,175,80)]",
     aisentiment: "drop-shadow-[20px_0px_20px_rgb(191,230,246)]",
+    mastra: "drop-shadow-[20px_0px_20px_rgb(76,175,80)]",
+    lovebuilder: "drop-shadow-[20px_0px_20px_rgb(222,91,121)]",
   };
 const tabIndex = tabs.indexOf(selected);
 
@@ -192,28 +196,23 @@ useEffect(() => {
 
     let workExpHeight;
     workExpHeight =
-        screenWidth >= 1600 ? 580 :
-        screenWidth >= 1440 ? 580 :
-        screenWidth >= 1024 ? 580 :
-        screenWidth >= 768  ? 680 :
-        screenWidth >= 425  ? 750 :
-        screenWidth >= 375  ? 780 :
-        820;
+        screenWidth >= 1600 ? 650 :
+        screenWidth >= 1440 ? 650 :
+        screenWidth >= 1024 ? 700 :
+        screenWidth >= 768  ? 1200 :
+        screenWidth >= 425  ? 1500 :
+        screenWidth >= 375  ? 1575 :
+        1575;
 
     if (!selectedProject) {
       projectsHeight =
-        screenWidth >= 1600 ? 3200 :
-        screenWidth >= 1440 ? 3600 :
-        screenWidth >= 1400 ? 3700 :
-        screenWidth >= 1330 ? 3800 :
-        screenWidth >= 1280 ? 3900 :
-        screenWidth >= 1200 ? 4450 :
-        screenWidth >= 1152 ? 4600 :
-        screenWidth >= 1024 ? 5000 :
-        screenWidth >= 980  ? 6400 :
-        screenWidth >= 900  ? 6800 :
-        screenWidth >= 768  ? 8000 :
-        10000;
+        screenWidth >= 1600 ? 3400 :
+        screenWidth >= 1440 ? 4200 :
+        screenWidth >= 1024 ? 5800 :
+        screenWidth >= 768  ? 8300 :
+        screenWidth >= 425  ? 12750 :
+        screenWidth >= 375  ? 13500 :
+        15100;
     } else {
       projectsHeight =
         screenWidth >= 1440 ? 750 :

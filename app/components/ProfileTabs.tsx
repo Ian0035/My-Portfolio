@@ -16,7 +16,7 @@ export default function ProfileTab({ handleTabChange }: ProfileTabProps) {
           <div className="mt-4 space-y-2 text-sm text-gray-400">
             <div className="flex items-center space-x-2">
               <MapPinned className="w-5 h-5 text-red-400" />
-              <span>Based in Växjö, Sweden</span>
+              <span>Based in Växjö, Sweden & Copenhagen, Denmark</span>
             </div>
             <div className="flex items-center space-x-2">
               <Cake className="w-5 h-5 text-red-400" />
@@ -24,14 +24,11 @@ export default function ProfileTab({ handleTabChange }: ProfileTabProps) {
             </div>
             <div className="flex items-center space-x-2">
               <Laptop className="w-5 h-5 text-red-400" />
-              <span>Data Scientist/ AI Engineer/ Full Stack Developer</span>
+              <span>Founder | Full Stack | AI | Data</span>
             </div>
+            
             <div className="flex items-center space-x-2">
               <BriefcaseBusiness className="w-5 h-5 text-red-400" />
-              <span>Internship @Palette 2025</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Clock className="w-5 h-5 text-red-400" />
               <span>2 Years of Sales Work Experience</span>
             </div>
           </div>
