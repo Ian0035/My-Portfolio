@@ -274,7 +274,7 @@ const cometRef = useRef<HTMLImageElement | null>(null);
       ) : (
 
     <div className="relative bg-black min-h-screen overflow-hidden bg-no-repeat text-white pt-4 w-full flex flex-col items-center justify-center">
-      <Snowfall color="white"/>
+      {/* Star Field <Snowfall color="white"/> */}
 
       {/* Star Field */}
       <StarField />
